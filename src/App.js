@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import Modals from "./components/Modals/Modals";
+import { useState, Fragment } from "react";
 
-function App() {
+const App = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const handleVisibleModal = () => {
+    setIsModalVisible((prevState) => !prevState);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <h3 onClick={handleVisibleModal}>Tampilkan Modal</h3>
+      {isModalVisible && (
+        <Modals onClose={handleVisibleModal} isVisible={isModalVisible}>
+          Modal tampil dalam {'<div id="modal-box"></div>'}, cek pada inspect element
+        </Modals>
+      )}
+    </Fragment>
   );
-}
+};
 
 export default App;
